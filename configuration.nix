@@ -7,6 +7,8 @@
     <home-manager/nixos>
   ];
 
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+
   # Bootloader settings
   boot.loader = {
     systemd-boot.enable = true;
@@ -75,7 +77,7 @@
           vim-easy-align
           vim-go
           fzf
-          vim-lastplace  # Added vim-lastplace plugin
+          vim-lastplace
         ];
         opt = [];
       };
