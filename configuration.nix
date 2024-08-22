@@ -181,7 +181,7 @@
   nix.gc.dates = "03:15";
 
   home-manager.users.last = { pkgs, ... }: {
-    home.packages = [ pkgs.alacritty pkgs.btop pkgs.cava pkgs.feh pkgs.firefox pkgs.fzf pkgs.git pkgs.gnupg pkgs.keychain pkgs.mpv pkgs.ncmpcpp ];
+    home.packages = [ pkgs.alacritty pkgs.btop pkgs.cava pkgs.feh pkgs.firefox pkgs.fzf pkgs.git pkgs.gnupg pkgs.keychain pkgs.mpv pkgs.ncmpcpp pkgs.vscodium ];
 
     programs.bash.enable = true;
     programs.bash.enableCompletion = true;
