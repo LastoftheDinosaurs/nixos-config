@@ -175,6 +175,8 @@
       awesome
       firefox
       steam
+      libreoffice-fresh
+      hunspell
     ];
   };
 
