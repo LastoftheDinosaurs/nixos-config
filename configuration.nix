@@ -7,13 +7,42 @@
     <home-manager/nixos>
   ];
 
-  # Switch to latest kernel
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot = {
+    # Switch to latest kernel
+    kernelPackages = pkgs.linuxPackages_latest;
 
-  # Bootloader settings
-  boot.loader = {
-    systemd-boot.enable = true;
-    efi.canTouchEfiVariables = true;
+    # Bootloader settings
+    loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+    };
+
+    # Plymouth configuration with adi1090x theme override
+    plymouth = {
+      enable = true;
+      theme = "rings";
+      themePackages = with pkgs; [
+        (adi1090x-plymouth-themes.override {
+          selected_themes = [ "rings" ];
+        })
+      ];
+    };
+
+    # Enable "Silent Boot"
+    consoleLogLevel = 0;
+    initrd.verbose = false;
+    kernelParams = [
+      "quiet"
+      "splash"
+      "boot.shell_on_fail"
+      "loglevel=3"
+      "rd.systemd.show_status=false"
+      "rd.udev.log_level=3"
+      "udev.log_priority=3"
+    ];
+
+    # Hide the OS choice for bootloaders
+    loader.timeout = 0;
   };
 
   # Networking settings
