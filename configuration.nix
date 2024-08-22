@@ -95,7 +95,14 @@
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
+    audit
+    dive
+    git
+    podman-compose
+    podman-tui
     wget
+    yubikey-manager
+    yubikey-personalization
     ((vim_configurable.override { }).customize {
       name = "vim-with-plugins";
 
@@ -195,10 +202,6 @@
     home = "/home/last";
     extraGroups = [ "networkmanager" "wheel" "audio" "video" ];
     packages = with pkgs; [
-      git
-      yubikey-personalization
-      yubikey-manager
-      audit
       awesome
       firefox
       steam
@@ -257,10 +260,20 @@
     dates = "03:15";
   };
 
-  # Enable VirtualBox with Extension Pack
-  virtualisation.virtualbox.host = {
-    enable = true;
-    enableExtensionPack = true;
+  # Virtualization settings
+  virtualisation = {
+    containers.enable = true;
+
+    podman = {
+      enable = true;
+      dockerCompat = true;
+      defaultNetwork.settings.dns_enabled = true;
+    };
+
+    virtualbox.host = {
+      enable = true;
+      enableExtensionPack = true;
+    };
   };
 
   # Add members to vboxusers group
