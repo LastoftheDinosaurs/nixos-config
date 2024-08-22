@@ -176,6 +176,9 @@
     })
   ];
 
+  # Enables GnuPG agent with socket-activation for every user session.
+  programs.gnupg.agent.enable = true;
+
   # Automatically clean the Nix Store
   nix.gc.automatic = true;
   nix.gc.dates = "03:15";
@@ -221,7 +224,7 @@
   services.gpg-agent = {
     enable = true;
     enableSshSupport = true;
-    #pinentryPackage = "curses";
+    pinentryPackage = pkgs.pinentry-curses;
   };
 
   # Git configuration specific to 'last'
