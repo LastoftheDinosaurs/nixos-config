@@ -177,6 +177,7 @@
       steam
       libreoffice-fresh
       hunspell
+      irssi
     ];
   };
 
@@ -221,6 +222,15 @@
     dates = "03:15";
   };
 
+  # Enable VirtualBox with Extension Pack
+  virtualisation.virtualbox.host = {
+    enable = true;
+    enableExtensionPack = true;
+  };
+
+  # Add members to vboxusers group
+  users.extraGroups.vboxusers.members = [ "last" ];
+
   # Home Manager configuration for user 'last'
   home-manager.users.last = { pkgs, ... }: {
     home.packages = with pkgs; [
@@ -232,6 +242,7 @@
       fzf
       git
       gnupg
+      irssi
       keychain
       mpv
       ncmpcpp
