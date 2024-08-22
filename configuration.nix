@@ -7,6 +7,8 @@
     <home-manager/nixos>
   ];
 
+
+  # Switch to latest kernel
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
   # Bootloader settings
@@ -172,6 +174,7 @@
       audit
       awesome
       firefox
+      steam
     ];
   };
 
