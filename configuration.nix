@@ -61,10 +61,13 @@
 
   # Package settings
   nixpkgs.config.allowUnfree = true;
+
   environment.systemPackages = with pkgs; [
     wget
-    (vim_configurable.customize {
+    ((vim_configurable.override { }).customize {
       name = "vim-with-plugins";
+
+      # Install Vim plugins
       vimrcConfig.packages.myVimPackage = with pkgs.vimPlugins; {
         start = [
           vim-airline
@@ -72,29 +75,22 @@
           vim-easy-align
           vim-go
           fzf
+          vim-lastplace  # Added vim-lastplace plugin
         ];
         opt = [];
       };
+
+      # Custom Vim configuration
       vimrcConfig.customRC = ''
         " Custom vimrc configuration
         set nocompatible
         set backspace=indent,eol,start
         syntax on
         set mouse=a
-
-        " Load plugins using Vim-Plug
-        call plug#begin(stdpath('data') . '/plugged')
-
-        Plug 'junegunn/seoul256.vim'
-        Plug 'https://github.com/junegunn/vim-easy-align.git'
-        Plug 'fatih/vim-go', { 'tag': '*' }
-        Plug 'neoclide/coc.nvim', { 'branch': 'release' }
-        Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-
-        call plug#end()
       '';
     })
   ];
+
 
   # Service settings
   services = {
