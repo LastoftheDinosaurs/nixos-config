@@ -187,6 +187,24 @@
     NIXPKGS_ALLOW_UNFREE = "1";
   };
 
+  fonts = {
+    enableDefaultPackages = true;
+
+    packages = with pkgs; [
+      (nerdfonts.override { fonts = [ "Iosevka" ]; })
+      ubuntu_font_family
+      liberation_ttf
+    ];
+
+    fontconfig = {
+      defaultFonts = {
+        serif = [ "Liberation Serif" ];
+        sansSerif = [ "Ubuntu" ];
+        monospace = [ "Iosevka" ];
+      };
+    };
+  };
+
   # GPG Agent with SSH support
   programs.gnupg.agent = {
     enable = true;
