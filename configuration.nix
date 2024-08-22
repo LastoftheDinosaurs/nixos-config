@@ -1,16 +1,17 @@
 { config, pkgs, ... }:
 
 {
-  # Import hardware configuration
-  imports =
-    [
-      ./hardware-configuration.nix
-      <home-manager/nixos>
-    ];
+  # Import hardware configuration and Home Manager
+  imports = [
+    ./hardware-configuration.nix
+    <home-manager/nixos>
+  ];
 
   # Bootloader settings
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader = {
+    systemd-boot.enable = true;
+    efi.canTouchEfiVariables = true;
+  };
 
   # Networking settings
   networking = {
@@ -23,135 +24,54 @@
     };
   };
 
-  # Set your time zone
+  # Timezone and Localization
   time.timeZone = "America/Chicago";
-
-  # Localization settings
-  i18n.defaultLocale = "en_US.UTF-8";
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "en_US.UTF-8";
-    LC_IDENTIFICATION = "en_US.UTF-8";
-    LC_MEASUREMENT = "en_US.UTF-8";
-    LC_MONETARY = "en_US.UTF-8";
-    LC_NAME = "en_US.UTF-8";
-    LC_NUMERIC = "en_US.UTF-8";
-    LC_PAPER = "en_US.UTF-8";
-    LC_TELEPHONE = "en_US.UTF-8";
-    LC_TIME = "en_US.UTF-8";
+  i18n = {
+    defaultLocale = "en_US.UTF-8";
+    extraLocaleSettings = {
+      LC_ADDRESS = "en_US.UTF-8";
+      LC_IDENTIFICATION = "en_US.UTF-8";
+      LC_MEASUREMENT = "en_US.UTF-8";
+      LC_MONETARY = "en_US.UTF-8";
+      LC_NAME = "en_US.UTF-8";
+      LC_NUMERIC = "en_US.UTF-8";
+      LC_PAPER = "en_US.UTF-8";
+      LC_TELEPHONE = "en_US.UTF-8";
+      LC_TIME = "en_US.UTF-8";
+    };
   };
 
-  # Enable X11 Windowing System
+  # X11 and Window Manager
   services.xserver = {
     enable = true;
-
-    # Configure display manager to use LightDM with auto-login for user 'last'
-    displayManager = {
-      lightdm.enable = true;
-      lightdm.autoLogin.enable = true;
-      lightdm.autoLogin.user = "last";
+    displayManager.lightdm = {
+      enable = true;
+      autoLogin.enable = true;
+      autoLogin.user = "last";
     };
-
-    # Enable AwesomeWM
     windowManager.awesome = {
       enable = true;
       luaModules = with pkgs.luaPackages; [
-        luarocks         # Lua package manager
-        luadbi-mysql     # Database abstraction layer
+        luarocks
+        luadbi-mysql
       ];
     };
-
-    # Optionally, set default session to AwesomeWM
     displayManager.defaultSession = "none+awesome";
   };
 
+  # Package settings
   nixpkgs.config.allowUnfree = true;
-
-  # Disable printing service (CUPS)
-  services.printing.enable = false;
-
-  # Enable and configure PipeWire for audio
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    pulse.enable = true;
-  };
-
-  # Enable cron
-  services.cron.enable = true;
-
-  # Disable bluetooth
-  hardware.bluetooth.enable = false;
-
-  # Disable PulseAudio to avoid conflicts with PipeWire
-  hardware.pulseaudio.enable = false;
-
-  # Enable real-time kernel support for PipeWire
-  security.rtkit.enable = true;
-
-  # Security settings
-  security.pam.services.login.u2fAuth = true;
-  security.pam.services.sudo.u2fAuth = true;
-
-  # Enable challenge-response authentication using YubiKey
-  security.pam.yubico = {
-    enable = true;
-    debug = true;
-    mode = "challenge-response";
-    id = [ "26900481" ];
-  };
-
-  # Enable polkit, required for graphical interfaces
-  security.polkit.enable = true;
-
-  security.audit.enable = true;
-  security.auditd.enable = true;
-
-  # Enable experimental features in Nix
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
-  # Define user accounts
-  users.users.last = {
-    isNormalUser = true;
-    description = "Last";
-    extraGroups = [ "networkmanager" "wheel" "audio" "video" ];
-    home = "/home/last";
-    packages = with pkgs; [
-      git
-      yubikey-personalization
-      yubikey-manager
-      audit
-      awesome
-      firefox
-    ];
-  };
-
-  home-manager.backupFileExtension = "hm-backup";
-
-  # Set environment variables
-  environment.variables = {
-    TERMINAL = "st";     # Set the terminal to st
-    EDITOR = "vim";      # Set vim as the default editor
-    VISUAL = "vim";      # Set vim as the visual editor
-    SSH_AUTH_SOCK = "$XDG_RUNTIME_DIR/gnupg/S.gpg-agent.ssh";  # SSH agent socket
-    XKB_DEFAULT_LAYOUT = "us";  # Set default keyboard layout
-    NIXPKGS_ALLOW_UNFREE = "1"; # Allow unfree packages
-    };
-
-    # List additional packages to install in the system profile
-    environment.systemPackages = with pkgs; [
-
-    # wget
+  environment.systemPackages = with pkgs; [
+    wget
     (vim_configurable.customize {
       name = "vim-with-plugins";
       vimrcConfig.packages.myVimPackage = with pkgs.vimPlugins; {
         start = [
           vim-airline
           vim-nix
-          #seoul256.vim            # Plugin 'junegunn/seoul256.vim'
-          vim-easy-align          # Plugin 'https://github.com/junegunn/vim-easy-align.git'
-          vim-go                  # Plugin 'fatih/vim-go', { 'tag': '*' }
-          #coc.nvim                # Plugin 'neoclide/coc.nvim', { 'branch': 'release' }
-          fzf                     # Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+          vim-easy-align
+          vim-go
+          fzf
         ];
         opt = [];
       };
@@ -176,91 +96,164 @@
     })
   ];
 
-  # Enables GnuPG agent with socket-activation for every user session.
-  programs.gnupg.agent.enable = true;
-
-  # Automatically clean the Nix Store
-  nix.gc.automatic = true;
-  nix.gc.dates = "03:15";
-
-  home-manager.users.last = { pkgs, ... }: {
-    home.packages = [ pkgs.alacritty pkgs.btop pkgs.cava pkgs.feh pkgs.firefox pkgs.fzf pkgs.git pkgs.gnupg pkgs.keychain pkgs.mpv pkgs.ncmpcpp pkgs.vscodium ];
-
-    programs.bash.enable = true;
-    programs.bash.enableCompletion = true;
-    programs.bash.historyControl = [ "ignoredups" ];
-    programs.bash.historyFile = "~/.bash_history";
-    programs.bash.historySize = 250000;
-    programs.bash.shellAliases = {
-      ll = "ls -l";
+  # Service settings
+  services = {
+    printing.enable = false;
+    pipewire = {
+      enable = true;
+      alsa.enable = true;
+      pulse.enable = true;
     };
-
-    programs.alacritty.enable = true;
-    programs.btop.enable = true;
-    programs.btop.settings = {
-      color_theme = "Default";
-      theme_background = false;
-    };
-    programs.cava.enable = true;
-    programs.cava.settings = {
-      general.framerate = 60;
-      input.method = "alsa";
-      smoothing.noise_reduction = 88;
-      color = {
-          background = "'#000000'";
-          foreground = "'#FFFFFF'";
-      };
+    cron.enable = true;
   };
 
-  programs.dircolors.enable = true;
-  programs.dircolors.enableBashIntegration = true;
+  # Hardware settings
+  hardware = {
+    bluetooth.enable = false;
+    pulseaudio.enable = false; # Prevent conflicts with PipeWire
+  };
 
-  programs.feh.enable = true;
-  programs.firefox.enable = true;
-  programs.fzf.enable = true;
-  programs.fzf.enableBashIntegration = true;
+  # Security settings
+  security = {
+    rtkit.enable = true; # Real-time kernel support for PipeWire
+    pam = {
+      services = {
+        login.u2fAuth = true;
+        sudo.u2fAuth = true;
+      };
+      yubico = {
+        enable = true;
+        debug = true;
+        mode = "challenge-response";
+        id = [ "26900481" ];
+      };
+    };
+    polkit.enable = true;
+    audit.enable = true;
+    auditd.enable = true;
+  };
+
+  # Enable experimental features in Nix
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+  # User account configuration
+  users.users.last = {
+    isNormalUser = true;
+    description = "Last";
+    home = "/home/last";
+    extraGroups = [ "networkmanager" "wheel" "audio" "video" ];
+    packages = with pkgs; [
+      git
+      yubikey-personalization
+      yubikey-manager
+      audit
+      awesome
+      firefox
+    ];
+  };
+
+  # Set environment variables
+  environment.variables = {
+    TERMINAL = "st";
+    EDITOR = "vim";
+    VISUAL = "vim";
+    SSH_AUTH_SOCK = "$XDG_RUNTIME_DIR/gnupg/S.gpg-agent.ssh";
+    XKB_DEFAULT_LAYOUT = "us";
+    NIXPKGS_ALLOW_UNFREE = "1";
+  };
 
   # GPG Agent with SSH support
-  services.gpg-agent = {
+  programs.gnupg.agent = {
     enable = true;
-    enableSshSupport = true;
+    #enableSshSupport = true;
     pinentryPackage = pkgs.pinentry-curses;
   };
 
-  # Git configuration specific to 'last'
-  programs.git = {
-    enable = true;
-    userName = "LastoftheDinosaurs";
-    userEmail = "last@dino.sh";
-    signing.key = "4081F38C2F7100AF";
+  # Automatically clean the Nix Store
+  nix.gc = {
+    automatic = true;
+    dates = "03:15";
   };
 
-  # Set SSH_AUTH_SOCK for GnuPG agent SSH support
-  home.sessionVariables.SSH_AUTH_SOCK = "$XDG_RUNTIME_DIR/gnupg/S.gpg-agent.ssh";
+  # Home Manager configuration for user 'last'
+  home-manager.users.last = { pkgs, ... }: {
+    home.packages = with pkgs; [
+      alacritty
+      btop
+      cava
+      feh
+      firefox
+      fzf
+      git
+      gnupg
+      keychain
+      mpv
+      ncmpcpp
+      vscodium
+    ];
 
-  programs.keychain.enable = true;
-  programs.keychain.enableBashIntegration = true;
-
-  programs.mpv.enable = true;
-  programs.ncmpcpp.enable = true;
-
-  # Removed vim from Home Manager configuration
-
-  programs.vscode = {
-      enable = true;
-      package = pkgs.vscodium;
-      extensions = with pkgs.vscode-extensions; [
+    programs = {
+      bash = {
+        enable = true;
+        enableCompletion = true;
+        historyControl = [ "ignoredups" ];
+        historyFile = "~/.bash_history";
+        historySize = 250000;
+        shellAliases.ll = "ls -l";
+      };
+      alacritty.enable = true;
+      btop = {
+        enable = true;
+        settings = {
+          color_theme = "Default";
+          theme_background = false;
+        };
+      };
+      cava = {
+        enable = true;
+        settings = {
+          general.framerate = 60;
+          input.method = "alsa";
+          smoothing.noise_reduction = 88;
+          color = {
+            background = "'#000000'";
+            foreground = "'#FFFFFF'";
+          };
+        };
+      };
+      dircolors = {
+        enable = true;
+        enableBashIntegration = true;
+      };
+      feh.enable = true;
+      firefox.enable = true;
+      fzf = {
+        enable = true;
+        enableBashIntegration = true;
+      };
+      git = {
+        enable = true;
+        userName = "LastoftheDinosaurs";
+        userEmail = "last@dino.sh";
+        signing.key = "4081F38C2F7100AF";
+      };
+      vscode = {
+        enable = true;
+        package = pkgs.vscodium;
+        extensions = with pkgs.vscode-extensions; [
           catppuccin.catppuccin-vsc
-      ];
+        ];
+      };
+    };
+
+    home.sessionVariables.SSH_AUTH_SOCK = "$XDG_RUNTIME_DIR/gnupg/S.gpg-agent.ssh";
+    home.stateVersion = "24.05"; # This is the Home Manager version
   };
 
-  # The state version is required and should stay at the version you
-  # originally installed.
-  home.stateVersion = "24.05";
-};
-
-  system.stateVersion = "24.05"; # This is the NixOS version
-  system.autoUpgrade.enable = true;
-  system.autoUpgrade.allowReboot = false;
+  # System-wide state version
+  system.stateVersion = "24.05";  # This is the NixOS version
+  system.autoUpgrade = {
+    enable = true;
+    allowReboot = false;
+  };
 }
-
