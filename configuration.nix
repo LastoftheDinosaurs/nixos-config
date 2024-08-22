@@ -207,11 +207,19 @@
     };
   };
 
-  # GPG Agent with SSH support
-  programs.gnupg.agent = {
-    enable = true;
-    #enableSshSupport = true;
-    pinentryPackage = pkgs.pinentry-curses;
+  programs = {
+    gnupg.agent = {
+      enable = true;
+      #enableSshSupport = true;
+      pinentryPackage = pkgs.pinentry-curses;
+    };
+
+    steam = {
+      enable = true;
+      remotePlay.openFirewall = false;
+      dedicatedServer.openFirewall = false;
+      localNetworkGameTransfers.openFirewall = false;
+    };
   };
 
   # Automatically clean the Nix Store
