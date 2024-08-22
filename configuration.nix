@@ -97,6 +97,7 @@
   environment.systemPackages = with pkgs; [
     audit
     dive
+    firefox
     git
     podman-compose
     podman-tui
@@ -203,9 +204,9 @@
     extraGroups = [ "networkmanager" "wheel" "audio" "video" ];
     packages = with pkgs; [
       awesome
-      firefox
       steam
       libreoffice-fresh
+      librewolf
       hunspell
       irssi
     ];
@@ -286,9 +287,7 @@
       btop
       cava
       feh
-      firefox
       fzf
-      git
       gnupg
       irssi
       keychain
