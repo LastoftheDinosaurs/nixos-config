@@ -159,9 +159,14 @@
         userEmail = "last@dino.sh";
         signing.key = "4081F38C2F7100AF";
         extraConfig = ''
-          commit.gpgSign true
-          tag.gpgSign true
-          gpg.program ${pkgs.gnupg}/bin/gpg
+          [commit]
+          gpgSign = true
+    
+          [tag]
+          gpgSign = true
+    
+          [gpg]
+          program = ${pkgs.gnupg}/bin/gp
         '';
       };
       librewolf = {
