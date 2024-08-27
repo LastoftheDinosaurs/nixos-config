@@ -106,6 +106,7 @@
     yubikey-personalization
     vim
     ansible
+    openvpn
     ((vim_configurable.override { }).customize {
       name = "vim-with-plugins";
 
