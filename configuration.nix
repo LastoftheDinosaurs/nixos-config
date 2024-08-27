@@ -49,7 +49,10 @@
   networking = {
     hostName = "nixos";
     enableIPv6 = false;
-    networkmanager.enable = true;
+    networkmanager = {
+      enable = true;
+      #dns = "default";
+    };
     firewall = {
       enable = true;
       allowPing = false;
@@ -142,6 +145,10 @@
       alsa.enable = true;
       pulse.enable = true;
     };
+    openvpn.servers = {
+      mullvadVPN  = { config = '' config /etc/openvpn/mullvad_config_linux_us_all/mullvad_us_all.conf ''; };
+    };
+    resolved.enable = true;
     cron.enable = true;
   };
 
