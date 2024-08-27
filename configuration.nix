@@ -105,6 +105,7 @@
     wget
     yubikey-manager
     yubikey-personalization
+    vim
     ((vim_configurable.override { }).customize {
       name = "vim-with-plugins";
 
