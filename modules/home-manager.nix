@@ -18,6 +18,10 @@
       home-manager
     ];
 
+    home.file.".config/alacritty/catppuccin-frappe.toml" = {
+      source = /etc/nixos/themes/alacritty/catppuccin-frappe.toml;
+    };
+
     home.file.".config/btop/themes/catppuccin_frappe.theme" = {
       source = /etc/nixos/themes/btop/themes/catppuccin_frappe.theme;
     };
@@ -31,7 +35,12 @@
         historySize = 250000;
         shellAliases.ll = "ls -l";
       };
-      alacritty.enable = true;
+      alacritty = {
+        enable = true;
+        settings = {
+          import = "~/.config/alacritty/catppuccin-latte.toml";
+        };
+      };
       btop = {
         enable = true;
         settings = {
