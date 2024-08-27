@@ -15,11 +15,12 @@
       mpv
       ncmpcpp
       vscodium
+      home-manager
     ];
 
-    imports = [
-      <catppuccin/modules/home-manager>
-    ];
+    home.file.".config/btop/themes/catppuccin_frappe.theme" = {
+      source = /etc/nixos/themes/btop/themes/catppuccin_frappe.theme;
+    };
 
     programs = {
       bash = {
@@ -34,8 +35,8 @@
       btop = {
         enable = true;
         settings = {
-          color_theme = "Default";
-          theme_background = false;
+          color_theme = "catppuccin_frappe";
+          theme_background = true;
         };
       };
       cava = {
