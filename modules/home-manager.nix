@@ -38,7 +38,7 @@
       alacritty = {
         enable = true;
         settings = {
-          import = "~/.config/alacritty/catppuccin-latte.toml";
+          import = "~/.config/alacritty/catppuccin-frappe.toml";
         };
       };
       btop = {
