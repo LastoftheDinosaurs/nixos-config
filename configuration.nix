@@ -4,9 +4,14 @@
   # Import hardware configuration and modularized configurations
   imports = [
     ./hardware-configuration.nix
+    <catppuccin/modules/nixos>
     <home-manager/nixos>  # Include Home Manager module
     ./modules/home-manager.nix  # Modularized Home Manager configuration
   ];
+
+  catppuccin.enable = true;
+  catppuccin.flavor = "frappe";
+  catppuccin.accent = "mauve";
 
   boot = {
     # Switch to latest kernel
@@ -21,12 +26,6 @@
     # Plymouth configuration with adi1090x theme override
     plymouth = {
       enable = true;
-      theme = "rings";
-      themePackages = with pkgs; [
-        (adi1090x-plymouth-themes.override {
-          selected_themes = [ "rings" ];
-        })
-      ];
     };
 
     # Enable "Silent Boot"

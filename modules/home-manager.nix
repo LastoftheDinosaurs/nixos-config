@@ -17,6 +17,10 @@
       vscodium
     ];
 
+    imports = [
+      <catppuccin/modules/home-manager>
+    ];
+
     programs = {
       bash = {
         enable = true;
