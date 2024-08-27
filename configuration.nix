@@ -51,7 +51,6 @@
     enableIPv6 = false;
     networkmanager = {
       enable = true;
-      #dns = "default";
     };
     firewall = {
       enable = true;
@@ -110,6 +109,7 @@
     vim
     ansible
     openvpn
+    pwgen
     ((vim_configurable.override { }).customize {
       name = "vim-with-plugins";
 
@@ -146,7 +146,10 @@
       pulse.enable = true;
     };
     openvpn.servers = {
-      mullvadVPN  = { config = '' config /etc/openvpn/mullvad_config_linux_us_all/mullvad_us_all.conf ''; };
+      mullvadVPN  = { 
+        config = '' config /etc/openvpn/mullvad_config_linux_us_all/mullvad_us_all.conf ''; 
+        updateResolvConf = true;
+      };
     };
     resolved.enable = true;
     cron.enable = true;
