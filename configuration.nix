@@ -227,7 +227,7 @@
     enableDefaultPackages = true;
 
     packages = with pkgs; [
-      (nerdfonts.override { fonts = [ "Iosevka" ]; })
+      (nerdfonts.override { fonts = [ "Iosevka" "JetBrainsMono" ]; })
       ubuntu_font_family
       liberation_ttf
     ];

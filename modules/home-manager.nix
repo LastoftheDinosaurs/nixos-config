@@ -39,7 +39,81 @@
       alacritty = {
         enable = true;
         settings = {
-          import = "~/.config/alacritty/catppuccin-frappe.toml";
+          window = {
+            dimensions = {
+              columns = 120;
+              lines = 30;
+            };
+            padding = {
+              x = 5;
+              y = 5;
+            };
+            decorations = "full";
+            opacity = 0.9;
+          };
+          
+          live_config_reload = true;
+
+          font = {
+            normal = {
+              family = "JetBrainsMono Nerd Font";
+              style = "Regular";
+            };
+            bold = {
+              family = "JetBrainsMono Nerd Font";
+              style = "Bold";
+            };
+            italic = {
+              family = "JetBrainsMono Nerd Font";
+              style = "Italic";
+            };
+            size = 12.0;
+          };
+
+          colors = {
+            primary = {
+              background = "0x303446";
+              foreground = "0xf2d5cf";
+            };
+            cursor = {
+              text = "0x303446";
+              cursor = "0xf2d5cf";
+            };
+            selection = {
+              text = "0x303446";
+              background = "0xf2d5cf";
+            };
+            normal = {
+              black = "0x303446";
+              red = "0xe78284";
+              green = "0xa6d189";
+              yellow = "0xe5c890";
+              blue = "0x8caaee";
+              magenta = "0xf4b8e4";
+              cyan = "0x81c8be";
+              white = "0xc6d0f5";
+            };
+            bright = {
+              black = "0x626880";
+              red = "0xe78284";
+              green = "0xa6d189";
+              yellow = "0xe5c890";
+              blue = "0x8caaee";
+              magenta = "0xf4b8e4";
+              cyan = "0x81c8be";
+              white = "0xb5bfe2";
+            };
+          };
+
+          cursor = {
+            style = "Block";
+            unfocused_hollow = true;
+          };
+
+          scrolling = {
+            history = 10000;
+            multiplier = 3;
+          };
         };
       };
       btop = {
