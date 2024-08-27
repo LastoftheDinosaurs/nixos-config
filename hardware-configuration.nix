@@ -13,15 +13,8 @@
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
-  fileSystems."/" =
-    { device = "/dev/disk/by-uuid/051d3bce-eb1a-4885-9284-3554f9ec40d1";
-      fsType = "ext4";
-    };
-
-  boot.initrd.luks.devices."luks-3d7ac1b0-e9fb-4ed8-a587-4c4bc93fcc6e".device = "/dev/disk/by-uuid/3d7ac1b0-e9fb-4ed8-a587-4c4bc93fcc6e";
-
-  fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/C567-8936";
+  fileSystems."/usb" =
+    { device = "/dev/disk/by-uuid/2E5F-B562";
       fsType = "vfat";
       options = [ "fmask=0022" "dmask=0022" ];
     };
@@ -34,6 +27,7 @@
   # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
   networking.useDHCP = lib.mkDefault true;
   # networking.interfaces.enp5s0.useDHCP = lib.mkDefault true;
+  # networking.interfaces.vboxnet0.useDHCP = lib.mkDefault true;
   # networking.interfaces.wlp4s0.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
