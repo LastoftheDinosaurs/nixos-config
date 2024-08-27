@@ -105,6 +105,7 @@
     yubikey-manager
     yubikey-personalization
     vim
+    ansible
     ((vim_configurable.override { }).customize {
       name = "vim-with-plugins";
 
