@@ -16,6 +16,7 @@
       ncmpcpp
       vscodium
       home-manager
+      element-desktop
     ];
 
     home.file.".config/alacritty/catppuccin-frappe.toml" = {
