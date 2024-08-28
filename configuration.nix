@@ -110,6 +110,7 @@
     ansible
     openvpn
     pwgen
+    android-tools
     ((vim_configurable.override { }).customize {
       name = "vim-with-plugins";
 
