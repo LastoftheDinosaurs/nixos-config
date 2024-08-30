@@ -111,6 +111,7 @@
     openvpn
     pwgen
     android-tools
+    keepassxc
     ((vim_configurable.override { }).customize {
       name = "vim-with-plugins";
 
