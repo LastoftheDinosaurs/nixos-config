@@ -43,6 +43,94 @@
 
     # Hide the OS choice for bootloaders
     loader.timeout = 0;
+    
+    kernel.sysctl = {
+        # Network Settings
+        "net.ipv4.ip_forward" = 0; # Disable IP forwarding
+        "net.ipv4.conf.all.rp_filter" = 1; # Enable reverse path filtering
+        "net.ipv4.conf.default.rp_filter" = 1; # Enable reverse path filtering for default
+        "net.ipv4.conf.all.accept_source_route" = 0; # Disable source routing
+        "net.ipv4.conf.default.accept_source_route" = 0; # Disable source routing for default
+        "net.ipv4.conf.all.arp_filter" = 1; # Enable ARP filtering
+        "net.ipv4.conf.default.arp_filter" = 1; # Enable ARP filtering for default
+        "net.ipv4.conf.all.log_martians" = 1; # Log packets with impossible addresses
+        "net.ipv4.conf.default.log_martians" = 1; # Log packets with impossible addresses for default
+        "net.ipv4.conf.all.accept_redirects" = 0; # Disable ICMP redirects
+        "net.ipv4.conf.default.accept_redirects" = 0; # Disable ICMP redirects for default
+        "net.ipv4.icmp_ignore_bogus_error_responses" = 1; # Ignore bogus ICMP error responses
+        "net.ipv4.conf.all.send_redirects" = 0; # Prevent sending of ICMP redirects
+        "net.ipv4.conf.default.send_redirects" = 0; # Prevent sending of ICMP redirects for default
+        "net.ipv4.tcp_syncookies" = 1; # Enable SYN cookies to protect against SYN flood attacks
+        "net.ipv4.tcp_fin_timeout" = 15; # Reduce time that sockets stay in TIME_WAIT state
+        "net.ipv4.tcp_keepalive_time" = 300; # Time between keepalive probes
+        "net.ipv4.tcp_keepalive_intvl" = 60; # Interval between keepalive probes
+        "net.ipv4.tcp_keepalive_probes" = 5; # Number of keepalive probes before declaring a connection dead
+        "net.ipv4.tcp_max_syn_backlog" = 1024; # Maximum number of remembered connection requests
+        "net.ipv4.tcp_max_tw_buckets" = 5000; # Maximum number of TIME_WAIT buckets
+        "net.ipv4.tcp_tw_reuse" = 1; # Reuse TIME_WAIT sockets for new connections
+        "net.ipv4.tcp_tw_recycle" = 0; # Disable TCP timestamp recycling
+        "net.ipv4.tcp_rfc1337" = 1; # Mitigate TCP Time-Wait assassination hazards
+        "net.ipv4.conf.all.secure_redirects" = 0; # Disable secure ICMP redirects
+        "net.ipv4.conf.default.secure_redirects" = 0; # Disable secure ICMP redirects for default
+        "net.ipv4.conf.all.send_redirects" = 0; # Disable sending of ICMP redirects
+        "net.ipv4.conf.default.send_redirects" = 0; # Disable sending of ICMP redirects for default
+        "net.ipv4.conf.all.accept_redirects" = 0; # Disable acceptance of ICMP redirects
+        "net.ipv4.conf.default.accept_redirects" = 0; # Disable acceptance of ICMP redirects for default
+        "net.ipv4.conf.all.accept_source_route" = 0; # Disable acceptance of source-routed packets
+        "net.ipv4.conf.default.accept_source_route" = 0; # Disable acceptance of source-routed packets for default
+        "net.ipv4.icmp_echo_ignore_broadcasts" = 1; # Ignore ICMP echo requests to broadcast addresses
+        "net.ipv4.icmp_ignore_bogus_error_responses" = 1; # Ignore bogus ICMP error responses
+
+        # Memory Management
+        "vm.swappiness" = 10; # Control the tendency of the kernel to swap
+        "vm.dirty_ratio" = 10; # Percentage of system memory used before writing to disk
+        "vm.dirty_background_ratio" = 5; # Percentage of system memory used before starting background writes
+        "vm.overcommit_memory" = 1; # Allow the kernel to overcommit memory
+        "vm.overcommit_ratio" = 50; # Percentage of RAM to be considered as committed
+        "vm.min_free_kbytes" = 65536; # Minimum number of kilobytes of free memory
+
+        # Security
+        "kernel.dmesg_restrict" = 1; # Restrict dmesg access to root only
+        "kernel.randomize_va_space" = 2; # Enable full address space randomization
+        "kernel.pid_max" = 65536; # Maximum number of processes
+        "kernel.kptr_restrict" = 1; # Restrict kernel pointer exposure
+        "kernel.unprivileged_bpf_disabled" = 1; # Disable unprivileged BPF usage
+        "kernel.sysrq" = 0; # Disable magic SysRq key
+        "kernel.yama.ptrace_scope" = 2; # Restricted ptrace access
+
+        # File Descriptors
+        "fs.file-max" = 100000; # Maximum number of file descriptors
+        "fs.protected_hardlinks" = 1; # Protect hardlinks
+        "fs.protected_symlinks" = 1; # Protect symlinks
+        "fs.suid_dumpable" = 0; # Disable core dumps for setuid binaries
+        "fs.inotify.max_user_watches" = 524288; # Maximum number of inotify watches
+
+        # Process Handling
+        "kernel.sched_child_runs_first" = 0; # Child processes do not run before parent processes
+        "kernel.sched_rr_timeslice_ms" = 100; # Time slice in milliseconds for round-robin scheduling
+
+        # IPC
+        "kernel.msgmax" = 65536; # Maximum size of a message in a message queue
+        "kernel.msgmni" = 1024; # Maximum number of message queue identifiers
+        "kernel.sem" = "250 256000 32 128"; # Semaphore settings
+        "kernel.shmmax" = 68719476736; # Maximum size of a shared memory segment
+        "kernel.shmall" = 4294967296; # Total amount of shared memory
+
+        # Networking
+        "net.ipv6.conf.all.disable_ipv6" = 1; # Disable IPv6
+        "net.ipv6.conf.default.disable_ipv6" = 1; # Disable IPv6 for default
+        "net.ipv6.conf.lo.disable_ipv6" = 1; # Disable IPv6 on the loopback interface
+        "net.core.somaxconn" = 1024; # Maximum number of connections for the socket
+        "net.core.netdev_max_backlog" = 5000; # Maximum number of packets allowed on the input queue
+        "net.core.rmem_max" = 16777216; # Increase receive buffer size
+        "net.core.wmem_max" = 16777216; # Increase send buffer size
+        "net.core.optmem_max" = 40960; # Maximum memory used for options
+
+        # Miscellaneous
+        "kernel.panic" = 10; # Reboot 10 seconds after a panic
+        "kernel.panic_on_oops" = 1; # Panic on kernel oops
+        "vm.panic_on_oom" = 1; # Panic on out-of-memory
+    };
   };
 
   # Networking settings
