@@ -26,7 +26,10 @@
         historyControl = [ "ignoredups" ];
         historyFile = "~/.bash_history";
         historySize = 250000;
-        shellAliases.ll = "ls -l";
+        shellAliases = {
+          ll = "ls -l";
+          medusajs-dev = "nix-shell /etc/nixos/shells/medusajs-dev.nix";
+        };
       };
       alacritty = {
         enable = true;
@@ -43,7 +46,7 @@
             decorations = "full";
             opacity = 0.9;
           };
-          
+
           live_config_reload = true;
 
           font = {
@@ -216,3 +219,4 @@
     home.stateVersion = "24.05"; # This is the Home Manager version
   };
 }
+

@@ -1,5 +1,5 @@
 {
-  description = "NixOS and Home Manager Configuration with Catppuccin Theme";
+  description = "NixOS and Home Manager Configuration";
 
   # Input Sources
   inputs = {
@@ -50,4 +50,3 @@
     };
   };
 }
-
