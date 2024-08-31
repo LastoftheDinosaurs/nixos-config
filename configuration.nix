@@ -15,7 +15,7 @@
 
   boot = {
     # Switch to latest kernel
-    kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = pkgs.linuxPackages_6_6_hardened;
 
     # Bootloader settings
     loader = {
@@ -80,6 +80,9 @@
   # X11 and Window Manager
   services.xserver = {
     enable = true;
+    layout = "us";
+    videoDrivers = [ "nvidia" ];
+    dpi = 180;
     displayManager.lightdm = {
       enable = true;
       autoLogin.enable = true;
@@ -92,11 +95,31 @@
         luadbi-mysql
       ];
     };
+    libinput = {
+      enable = true;
+      mouse = {
+        accelProfile = "flat";
+      };
+      touchpad = {
+        accelProfile = "flat";
+      };
+    };
     displayManager.defaultSession = "none+awesome";
   };
 
+  # Make Qt 5 applications look similar to GTK ones
+  qt.enable = true;
+  qt.platformTheme = "gtk2";
+  qt.style = "gtk2";
+
   # Package settings
   nixpkgs.config.allowUnfree = true;
+
+  environment.variables = {
+    GDK_SCALE = "2";
+    GDK_DPI_SCALE = "0.5";
+    _JAVA_OPTIONS = "-Dsun.java2d.uiScale=2";
+  };
 
   environment.systemPackages = with pkgs; [
     audit
@@ -115,6 +138,7 @@
     android-tools
     keepassxc
     aide
+    xorg.xev
     ((vim_configurable.override { }).customize {
       name = "vim-with-plugins";
 
@@ -183,6 +207,21 @@
   hardware = {
     bluetooth.enable = false;
     pulseaudio.enable = false; # Prevent conflicts with PipeWire
+    nvidia = {
+      modesetting.enable = true;
+      powerManagement.enable = false;
+      powerManagement.finegrained = false;
+      nvidiaSettings = true;
+      package = config.boot.kernelPackages.nvidiaPackages.production;
+    };
+    opengl = {
+      enable = true;
+      driSupport = true;
+      driSupport32Bit = true;
+      extraPackages = with pkgs; [
+        config.boot.kernelPackages.nvidiaPackages.production
+      ];
+    };
   };
 
   # Security settings
