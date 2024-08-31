@@ -221,6 +221,7 @@
     keepassxc
     aide
     xorg.xev
+    nodejs
     ((vim_configurable.override { }).customize {
       name = "vim-with-plugins";
 
