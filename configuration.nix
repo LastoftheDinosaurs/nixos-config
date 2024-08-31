@@ -82,7 +82,7 @@
     enable = true;
     layout = "us";
     videoDrivers = [ "nvidia" ];
-    dpi = 180;
+    dpi = 150;
     displayManager.lightdm = {
       enable = true;
       autoLogin.enable = true;
