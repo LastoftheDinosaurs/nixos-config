@@ -288,11 +288,10 @@
     chrony = {
       enable = true;
       servers = [
-        "time.nist.gov"
-        "0.us.pool.ntp.org"
-        "1.us.pool.ntp.org"
-        "2.us.pool.ntp.org"
-        "3.us.pool.ntp.org"
+        "0.centos.pool.ntp.org"
+        "1.centos.pool.ntp.org"
+        "2.centos.pool.ntp.org"
+        "3.centos.pool.ntp.org"
       ];
       enableNTS = true;
       extraConfig = ''
