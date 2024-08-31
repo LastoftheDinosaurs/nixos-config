@@ -222,6 +222,7 @@
     aide
     xorg.xev
     nodejs
+    tree
     ((vim_configurable.override { }).customize {
       name = "vim-with-plugins";
 
