@@ -114,6 +114,7 @@
     pwgen
     android-tools
     keepassxc
+    aide
     ((vim_configurable.override { }).customize {
       name = "vim-with-plugins";
 
@@ -314,6 +315,37 @@
 
   # Add members to vboxusers group
   users.extraGroups.vboxusers.members = [ "last" ];
+
+  systemd.timers.aide-task = {
+    enable = true;
+    timerConfig = {
+      OnCalendar = "daily";  # Adjust this to the desired frequency
+      Unit = "aide-task.service";  # The service that the timer triggers
+    };
+    wantedBy = ["timers.target"];
+  };
+
+  systemd.services.aide-task = {
+    enable = true;
+    serviceConfig.Type = "oneshot";
+    path = [ pkgs.aide ];  # Ensure 'pkgs.aide' is included in the path
+    script = ''
+      # Initialize AIDE database if it doesn't exist
+      if [ ! -f /var/lib/aide/aide.db.gz ]; then
+        echo "Initializing AIDE database..."
+        aide --init
+        cp /var/lib/aide/aide.db.new.gz /var/lib/aide/aide.db.gz
+      else
+        echo "Updating AIDE database..."
+        aide --update
+        cp /var/lib/aide/aide.db.new.gz /var/lib/aide/aide.db.gz
+      fi
+
+      # Perform a check against the AIDE database
+      echo "Running AIDE check..."
+      aide --check
+    '';
+  };
 
   # System-wide state version
   system.stateVersion = "24.05";  # This is the NixOS version
