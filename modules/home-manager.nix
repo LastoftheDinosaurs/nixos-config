@@ -19,14 +19,6 @@
       element-desktop
     ];
 
-    home.file.".config/alacritty/catppuccin-frappe.toml" = {
-      source = /etc/nixos/themes/alacritty/catppuccin-frappe.toml;
-    };
-
-    home.file.".config/btop/themes/catppuccin_frappe.theme" = {
-      source = /etc/nixos/themes/btop/themes/catppuccin_frappe.theme;
-    };
-
     programs = {
       bash = {
         enable = true;

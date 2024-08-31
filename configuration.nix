@@ -1,13 +1,8 @@
-{ config, pkgs, ... }:
+{ config, pkgs, catppuccin, ... }:
 
 {
-  # Import hardware configuration and modularized configurations
   imports = [
     ./hardware-configuration.nix
-    <catppuccin/modules/nixos>
-    <home-manager/nixos>  # Include Home Manager module
-    ./modules/home-manager.nix  # Modularized Home Manager configuration
-    <nixpkgs/nixos/modules/profiles/hardened.nix>
   ];
 
   catppuccin.enable = true;
