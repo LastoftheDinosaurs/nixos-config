@@ -7,6 +7,7 @@
     <catppuccin/modules/nixos>
     <home-manager/nixos>  # Include Home Manager module
     ./modules/home-manager.nix  # Modularized Home Manager configuration
+    <nixpkgs/nixos/modules/profiles/hardened.nix>
   ];
 
   catppuccin.enable = true;
