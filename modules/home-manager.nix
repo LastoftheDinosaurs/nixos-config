@@ -166,7 +166,7 @@
           gpgSign = true
     
           [gpg]
-          program = ${pkgs.gnupg}/bin/gp
+          program = ${pkgs.gnupg}
         '';
       };
       librewolf = {
