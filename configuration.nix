@@ -82,7 +82,7 @@
     enable = true;
     layout = "us";
     videoDrivers = [ "nvidia" ];
-    dpi = 150;
+    dpi = 135;
     displayManager.lightdm = {
       enable = true;
       autoLogin.enable = true;
@@ -116,7 +116,7 @@
   nixpkgs.config.allowUnfree = true;
 
   environment.variables = {
-    GDK_SCALE = "2";
+    GDK_SCALE = "1.75";
     GDK_DPI_SCALE = "0.5";
     _JAVA_OPTIONS = "-Dsun.java2d.uiScale=2";
   };
@@ -182,6 +182,7 @@
     };
     resolved.enable = false;
     cron.enable = true;
+    openssh.enable = false;
     dnscrypt-proxy2 = {
       enable = true;
       settings = {
