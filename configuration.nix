@@ -72,14 +72,7 @@
         "net.ipv4.tcp_rfc1337" = 1; # Mitigate TCP Time-Wait assassination hazards
         "net.ipv4.conf.all.secure_redirects" = 0; # Disable secure ICMP redirects
         "net.ipv4.conf.default.secure_redirects" = 0; # Disable secure ICMP redirects for default
-        "net.ipv4.conf.all.send_redirects" = 0; # Disable sending of ICMP redirects
-        "net.ipv4.conf.default.send_redirects" = 0; # Disable sending of ICMP redirects for default
-        "net.ipv4.conf.all.accept_redirects" = 0; # Disable acceptance of ICMP redirects
-        "net.ipv4.conf.default.accept_redirects" = 0; # Disable acceptance of ICMP redirects for default
-        "net.ipv4.conf.all.accept_source_route" = 0; # Disable acceptance of source-routed packets
-        "net.ipv4.conf.default.accept_source_route" = 0; # Disable acceptance of source-routed packets for default
         "net.ipv4.icmp_echo_ignore_broadcasts" = 1; # Ignore ICMP echo requests to broadcast addresses
-        "net.ipv4.icmp_ignore_bogus_error_responses" = 1; # Ignore bogus ICMP error responses
 
         # Memory Management
         "vm.swappiness" = 10; # Control the tendency of the kernel to swap
