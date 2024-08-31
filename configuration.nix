@@ -183,6 +183,7 @@
     resolved.enable = false;
     cron.enable = true;
     openssh.enable = false;
+    syslogd.enable = true;
     dnscrypt-proxy2 = {
       enable = true;
       settings = {
