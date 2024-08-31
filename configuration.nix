@@ -447,6 +447,10 @@
       localNetworkGameTransfers.openFirewall = false;
     };
 
+    bash = {
+      enableCompletion = true;
+    };
+
     # Better shell prompt
     starship = {
       enable = true;
