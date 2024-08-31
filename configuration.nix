@@ -285,6 +285,21 @@
         server_names = [ "adguard-dns" ];
       };
     };
+    chrony = {
+      enable = true;
+      servers = [
+        "time.nist.gov"
+        "0.us.pool.ntp.org"
+        "1.us.pool.ntp.org"
+        "2.us.pool.ntp.org"
+        "3.us.pool.ntp.org"
+      ];
+      enableNTS = true;
+      extraConfig = ''
+        ntsservercert /etc/chrony/nts/fullchain.pem
+        ntsserverkey /etc/chrony/nts/key.pem
+      '';
+    };
   };
 
   # Hardware settings
