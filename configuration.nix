@@ -356,6 +356,8 @@
   # Enable experimental features in Nix
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
+  users.defaultUserShell = pkgs.bash;
+
   # User account configuration
   users.users.last = {
     isNormalUser = true;
