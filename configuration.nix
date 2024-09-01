@@ -218,6 +218,7 @@
     xorg.xev
     nodejs
     tree
+    vscode
     ((vim_configurable.override { }).customize {
       name = "vim-with-plugins";
 
