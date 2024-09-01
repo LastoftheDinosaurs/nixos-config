@@ -28,7 +28,7 @@
         historySize = 250000;
         shellAliases = {
           ll = "ls -l";
-          medusajs-dev = "nix-shell /etc/nixos/shells/medusajs-dev.nix";
+          medusajs-dev = "nix-shell /etc/nixos/shells/medusajs/medusajs-dev.nix";
         };
       };
       alacritty = {
