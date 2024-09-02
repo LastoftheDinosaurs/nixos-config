@@ -1,0 +1,3 @@
+[submodule "shells/medusajs"]
+	path = shells/medusajs
+	url = git@github.com:LastoftheDinosaurs/openmocha-shop.git
