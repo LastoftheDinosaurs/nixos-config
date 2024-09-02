@@ -229,10 +229,8 @@
         pkgs.vimPlugins.tailwindcss-colors-nvim
         pkgs.vimPlugins.vim-airline
         pkgs.vimPlugins.vim-dotenv
-        pkgs.vim-vagrant
-        pkgs.vim-vaultproject
-        pkgs.vim-terraform
-        pkgs.vim-consul
+        pkgs.vimPlugins.vim-vagrant
+        pkgs.vimPlugins.vim-terraform
       ];  
     };
   };
