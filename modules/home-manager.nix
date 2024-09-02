@@ -35,6 +35,14 @@
         ll = "ls -l";
         medusajs-dev = "nix-shell /etc/nixos/shells/medusajs/medusajs-dev.nix";
       };
+      sessionVariables = {
+        EDITOR = "vim";
+        
+      };
+      initExtra = ''
+        # include .profile if it exists
+        [[ -f ~/.profile ]] && . ~/.profile
+      '';
     };
 
     alacritty = {

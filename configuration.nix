@@ -193,14 +193,6 @@
   # Package settings
   nixpkgs.config.allowUnfree = true;
 
-  environment.variables = {
-    GDK_SCALE = "1.75";
-    GDK_DPI_SCALE = "0.5";
-    _JAVA_OPTIONS = "-Dsun.java2d.uiScale=2";
-    ELECTRON_ENABLE_LOGGING = "true";
-    ELECTRON_USE_SCALE_FACTOR = "1.5"; # Adjust the scale factor as needed
-  };
-
   environment.systemPackages = with pkgs; [
     audit
     dive
@@ -232,7 +224,7 @@
           vim-easy-align
           vim-go
           fzf
-          vimPlugins.fzfWrapper
+          fzfWrapper
           vim-lastplace
         ];
         opt = [];
@@ -397,6 +389,11 @@
     SSH_AUTH_SOCK = "$XDG_RUNTIME_DIR/gnupg/S.gpg-agent.ssh";
     XKB_DEFAULT_LAYOUT = "us";
     NIXPKGS_ALLOW_UNFREE = "1";
+    GDK_SCALE = "1.75";
+    GDK_DPI_SCALE = "0.5";
+    _JAVA_OPTIONS = "-Dsun.java2d.uiScale=2";
+    ELECTRON_ENABLE_LOGGING = "true";
+    ELECTRON_USE_SCALE_FACTOR = "1.75"; # Adjust the scale factor as need
   };
 
   # This is using a rec (recursive) expression to set and access XDG_BIN_HOME within the expression
