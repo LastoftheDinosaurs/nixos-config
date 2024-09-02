@@ -21,13 +21,8 @@
           ./configuration.nix
           catppuccin.nixosModules.catppuccin
           home-manager.nixosModules.home-manager
-          ./modules/home-manager.nix
-
-          # Include the hardened profile for added security.
-          ({ config, pkgs, ... }: import "${nixpkgs}/nixos/modules/profiles/hardened.nix" {
-            inherit config pkgs;
-            lib = nixpkgs.lib;
-          })
+          #./modules/home-manager.nix
+          # If any other NixOS modules are needed, include them here
         ];
 
         specialArgs = { inherit nixpkgs catppuccin; };
@@ -37,16 +32,19 @@
     homeConfigurations = {
       last = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        homeDirectory = "/home/last";
-        username = "last";
-
-        configuration = {
-          imports = [
-            ./modules/home-manager.nix
-            catppuccin.homeManagerModules.catppuccin
-          ];
-        };
+        modules = [
+          ./modules/home-manager.nix
+          catppuccin.homeManagerModules.catppuccin
+          {
+            home = {
+              username = "last";
+              homeDirectory = "/home/last";
+              stateVersion = "24.05";  # Ensure this matches the Home Manager version
+            };
+          }
+        ];
       };
     };
   };
 }
+

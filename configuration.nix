@@ -196,6 +196,8 @@
     GDK_SCALE = "1.75";
     GDK_DPI_SCALE = "0.5";
     _JAVA_OPTIONS = "-Dsun.java2d.uiScale=2";
+    ELECTRON_ENABLE_LOGGING = "true";
+    ELECTRON_USE_SCALE_FACTOR = "1.5"; # Adjust the scale factor as needed
   };
 
   environment.systemPackages = with pkgs; [
@@ -218,7 +220,6 @@
     xorg.xev
     nodejs
     tree
-    vscode
     ((vim_configurable.override { }).customize {
       name = "vim-with-plugins";
 
