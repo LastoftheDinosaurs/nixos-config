@@ -206,14 +206,34 @@
         "webgl.disabled" = true;  # Disable WebGL to reduce fingerprinting.
       };
     };
-
-    vscode = {
+    neovim = {
       enable = true;
-      package = pkgs.vscodium;
-      extensions = with pkgs.vscode-extensions; [
-        catppuccin.catppuccin-vsc
-        catppuccin.catppuccin-vsc-icons
-      ];
+      defaultEditor = true;
+      viAlias = true;
+      vimAlias = true;
+      plugins = [
+        pkgs.vimPlugins.nvim-tree-lua
+        {
+          plugin = pkgs.vimPlugins.vim-startify;
+          config = "let g:startify_change_to_vcs_root = 0";
+        }
+        pkgs.vimPlugins.ansible-vim
+        pkgs.vimPlugins.calendar-vim
+        pkgs.vimPlugins.catppuccin-nvim
+        pkgs.vimPlugins.fzf-vim
+        pkgs.vimPlugins.lazy-nvim
+        pkgs.vimPlugins.nerdtree
+        pkgs.vimPlugins.pretty-fold-nvim
+        pkgs.vimPlugins.smartcolumn-nvim
+        pkgs.vimPlugins.stabilize-nvim
+        pkgs.vimPlugins.tailwindcss-colors-nvim
+        pkgs.vimPlugins.vim-airline
+        pkgs.vimPlugins.vim-dotenv
+        pkgs.vim-vagrant
+        pkgs.vim-vaultproject
+        pkgs.vim-terraform
+        pkgs.vim-consul
+      ];  
     };
   };
 }

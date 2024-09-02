@@ -213,32 +213,6 @@
     xorg.xev
     nodejs
     tree
-    ((vim_configurable.override { }).customize {
-      name = "vim-with-plugins";
-
-      # Install Vim plugins
-      vimrcConfig.packages.myVimPackage = with pkgs.vimPlugins; {
-        start = [
-          vim-airline
-          vim-nix
-          vim-easy-align
-          vim-go
-          fzf
-          fzfWrapper
-          vim-lastplace
-        ];
-        opt = [];
-      };
-
-      # Custom Vim configuration
-      vimrcConfig.customRC = ''
-        " Custom vimrc configuration
-        set nocompatible
-        set backspace=indent,eol,start
-        syntax on
-        set mouse=a
-      '';
-    })
   ];
 
   # Service settings
