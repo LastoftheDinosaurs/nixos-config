@@ -356,7 +356,7 @@
             options = [ "NOPASSWD" ];
           }
         ];
-        groups = [ "wheel" "docker" ];
+        groups = [ "wheel" ];
       }];
       extraConfig = with pkgs; ''
         Defaults:picloud secure_path="${lib.makeBinPath [
@@ -482,16 +482,10 @@
   virtualisation = {
     containers.enable = true;
 
-    #podman = {
-    #  enable = true;
-    #  dockerCompat = true;
-    #  defaultNetwork.settings.dns_enabled = true;
-    #};
-
-    docker.enable = true;
-    docker.rootless = {
+    podman = {
       enable = true;
-      setSocketVariable = true;
+      dockerCompat = true;
+      defaultNetwork.settings.dns_enabled = true;
     };
 
     virtualbox.host = {

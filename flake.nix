@@ -21,7 +21,6 @@
           ./configuration.nix
           catppuccin.nixosModules.catppuccin
           home-manager.nixosModules.home-manager
-          #./modules/home-manager.nix
           # If any other NixOS modules are needed, include them here
         ];
 
