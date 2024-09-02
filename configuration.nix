@@ -119,6 +119,7 @@
         "kernel.panic" = 10; # Reboot 10 seconds after a panic
         "kernel.panic_on_oops" = 1; # Panic on kernel oops
         "vm.panic_on_oom" = 1; # Panic on out-of-memory
+        "kernel.unprivileged_userns_clone" = 1; # For podman
     };
   };
 
@@ -231,6 +232,7 @@
           vim-easy-align
           vim-go
           fzf
+          vimPlugins.fzfWrapper
           vim-lastplace
         ];
         opt = [];

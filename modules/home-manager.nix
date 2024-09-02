@@ -43,7 +43,7 @@
         window = {
           dimensions = { columns = 120; lines = 30; };
           padding = { x = 5; y = 5; };
-          decorations = "full";
+          decorations = "none";
           opacity = 0.9;
         };
 
