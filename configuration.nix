@@ -201,6 +201,7 @@
     podman-compose
     podman-tui
     wget
+    gnupg
     yubikey-manager
     yubikey-personalization
     vim
@@ -266,6 +267,7 @@
         ntsserverkey /etc/chrony/nts/key.pem
       '';
     };
+    udev.packages = [ pkgs.yubikey-personalization ];
   };
 
   # Hardware settings
@@ -302,6 +304,11 @@
         debug = true;
         mode = "challenge-response";
         id = [ "26900481" ];
+      };
+      u2f = {
+        enable = true;
+        interactive = true;
+        cue = true;
       };
     };
     polkit.enable = true;
@@ -410,6 +417,7 @@
     gnupg.agent = {
       enable = true;
       pinentryPackage = pkgs.pinentry-curses;
+      enableSSHSupport = true;
     };
 
     steam = {
@@ -444,7 +452,7 @@
       };
     };
   };
-
+ 
   # Automatically clean the Nix Store
   nix.gc = {
     automatic = true;
