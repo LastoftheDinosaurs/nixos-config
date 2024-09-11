@@ -33,7 +33,7 @@
       historySize = 250000;
       shellAliases = {
         ll = "ls -l";
-        medusajs-dev = "nix-shell /etc/nixos/shells/medusajs/medusajs-dev.nix";
+        medusajs-dev = "nix-shell /etc/nixos/shells/medusajs/default.nix";
       };
       sessionVariables = {
         EDITOR = "vim";
