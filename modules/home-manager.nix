@@ -17,6 +17,9 @@
       vscodium
       home-manager
       element-desktop
+      yubikey-manager
+      yubikey-personalization
+      podman-compose
     ];
 
     sessionVariables.SSH_AUTH_SOCK = "$XDG_RUNTIME_DIR/gnupg/S.gpg-agent.ssh";

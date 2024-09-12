@@ -136,6 +136,13 @@
       enable = true;
       allowPing = false;
     };
+    interfaces.enp5s0 = {
+      ipv4.addresses = [{
+        address = "192.168.100.3";
+        prefixLength = 24;
+      }];
+      useDHCP = false;
+    };
   };
 
   # Timezone and Localization
@@ -197,14 +204,9 @@
     audit
     dive
     firefox
-    git
-    podman-compose
-    podman-tui
-    wget
     gnupg
-    yubikey-manager
-    yubikey-personalization
-    vim
+    neovim
+    git
     ansible
     openvpn
     pwgen
@@ -212,8 +214,7 @@
     keepassxc
     aide
     xorg.xev
-    nodejs
-    tree
+    yubikey-personalization-gui
   ];
 
   # Service settings
