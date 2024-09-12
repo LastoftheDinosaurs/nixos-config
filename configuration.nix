@@ -215,6 +215,7 @@
     aide
     xorg.xev
     yubikey-personalization-gui
+    nmap
   ];
 
   # Service settings
@@ -437,7 +438,7 @@
       enable = true;
       settings = {
         username = {
-          style_user = "blue bold";
+          style_user = "green bold";
           style_root = "red bold";
           format = "[$user]($style) ";
           disabled = false;
@@ -446,7 +447,7 @@
         hostname = {
           ssh_only = false;
           ssh_symbol = "🌐 ";
-          format = "on [$hostname](bold red) ";
+          format = "on [$hostname](bold blue) ";
           trim_at = ".local";
           disabled = false;
         };
