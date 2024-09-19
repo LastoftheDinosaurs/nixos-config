@@ -138,7 +138,7 @@
     };
     interfaces.enp5s0 = {
       ipv4.addresses = [{
-        address = "192.168.100.3";
+        address = "192.168.0.5";
         prefixLength = 24;
       }];
       useDHCP = false;
@@ -216,6 +216,11 @@
     xorg.xev
     yubikey-personalization-gui
     nmap
+    pavucontrol
+    blueman
+    (calibre.override {
+      unrarSupport = true;
+    })
   ];
 
   # Service settings
@@ -270,11 +275,14 @@
       '';
     };
     udev.packages = [ pkgs.yubikey-personalization ];
+    udisks2.enable = true;
+    blueman.enable = true;
   };
 
   # Hardware settings
   hardware = {
-    bluetooth.enable = false;
+    bluetooth.enable = true;
+    bluetooth.powerOnBoot = true;
     pulseaudio.enable = false; # Prevent conflicts with PipeWire
     nvidia = {
       modesetting.enable = true;
