@@ -38,6 +38,7 @@
       shellAliases = {
         ll = "ls -l";
         medusajs-dev = "nix-shell /etc/nixos/shells/medusajs/default.nix";
+        media-stack = "nix-shell /etc/nixos/shells/media-stack/default.nix";
       };
       sessionVariables = {
         EDITOR = "vim";
