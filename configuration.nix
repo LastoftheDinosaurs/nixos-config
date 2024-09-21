@@ -218,6 +218,7 @@
     nmap
     pavucontrol
     blueman
+    ffmpeg-full
     (calibre.override {
       unrarSupport = true;
     })
